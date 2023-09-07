@@ -53,10 +53,18 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
+        /**
+         * In the Lemonade function we add variables counter and currntStep
+         * The counter variable is used for lemon squeezing. In which we set the mutable state as 0.
+         * In the counter we set the range using random function between 2 to 4.
+         * The currentStep variable tells on which state the app is running. Which runs on the basis of when condition.
+         * And we set the mutableStateOf currentStep as 1.
+         */
 fun Lemonade(modifier: Modifier = Modifier) {
     var counter by remember { mutableStateOf(0) }
     var currentStep by remember { mutableStateOf(1) }
-
+// In each State only the image and text get change.
+    // The State get change on the basis of Clickable function.
     when (currentStep) {
         1 -> {
             Column(
@@ -65,8 +73,7 @@ fun Lemonade(modifier: Modifier = Modifier) {
                 verticalArrangement = Arrangement.Center
             ) {
                 val borderColor = Color(195, 236, 210)
-                Image(
-                    painter = painterResource(R.drawable.lemon_tree),
+                Image(painter = painterResource(R.drawable.lemon_tree),
                     contentDescription = stringResource(R.string.lemon_content_description),
                     modifier = Modifier
                         .wrapContentSize()
@@ -75,16 +82,15 @@ fun Lemonade(modifier: Modifier = Modifier) {
                             width = 2.dp,
                             color = borderColor,
                             shape = AbsoluteRoundedCornerShape(4.dp)
-                        ).padding(17.dp)
+                        )
+                        .padding(17.dp)
                         .clickable {
-                            counter = (2..4).random()
-                            currentStep = 2
-                        }
-                )
+                            counter = (2..4).random()  // counter range set between 2 to 4
+                            currentStep = 2                 // app move to second stage.
+                        })
                 Spacer(modifier = Modifier.height(16.dp))
                 Text(
-                    text = stringResource(R.string.lemon_tree),
-                    fontSize = 18.sp
+                    text = stringResource(R.string.lemon_tree), fontSize = 18.sp
                 )
             }
 
@@ -98,8 +104,7 @@ fun Lemonade(modifier: Modifier = Modifier) {
                 verticalArrangement = Arrangement.Center
             ) {
                 val borderColor = Color(195, 236, 210)
-                Image(
-                    painter = painterResource(R.drawable.lemon_squeeze),
+                Image(painter = painterResource(R.drawable.lemon_squeeze),
                     contentDescription = stringResource(R.string.lemon_content_description),
                     modifier = Modifier
                         .wrapContentSize()
@@ -108,8 +113,10 @@ fun Lemonade(modifier: Modifier = Modifier) {
                             width = 2.dp,
                             color = borderColor,
                             shape = AbsoluteRoundedCornerShape(4.dp)
-                        ).padding(17.dp)
+                        )
+                        .padding(17.dp)
                         .clickable {
+                            //The counter value get decrease. When the counter value get equal to 0 the app move to 3rd state.
                             counter--
                             if (counter == 0) {
                                 currentStep = 3
@@ -131,8 +138,7 @@ fun Lemonade(modifier: Modifier = Modifier) {
                 verticalArrangement = Arrangement.Center
             ) {
                 val borderColor = Color(195, 236, 210)
-                Image(
-                    painter = painterResource(R.drawable.lemon_drink),
+                Image(painter = painterResource(R.drawable.lemon_drink),
                     contentDescription = stringResource(R.string.lemon_content_description),
                     modifier = Modifier
                         .wrapContentSize()
@@ -141,9 +147,9 @@ fun Lemonade(modifier: Modifier = Modifier) {
                             width = 2.dp,
                             color = borderColor,
                             shape = AbsoluteRoundedCornerShape(4.dp)
-                        ).padding(17.dp)
-                        .clickable { currentStep = 4 }
-                )
+                        )
+                        .padding(17.dp)
+                        .clickable { currentStep = 4 })
                 Spacer(modifier = Modifier.height(32.dp))
                 Text(
                     text = stringResource(R.string.glass_of_lemonade)
@@ -161,22 +167,21 @@ fun Lemonade(modifier: Modifier = Modifier) {
             ) {
                 val borderColor = Color(195, 236, 210)
 
-                Image(
-                    painter = painterResource(R.drawable.lemon_restart),
+                Image(painter = painterResource(R.drawable.lemon_restart),
                     contentDescription = stringResource(R.string.lemon_content_description),
                     modifier = Modifier
-                        .wrapContentSize().background(borderColor, AbsoluteRoundedCornerShape(4.dp))
+                        .wrapContentSize()
+                        .background(borderColor, AbsoluteRoundedCornerShape(4.dp))
                         .border(
                             width = 2.dp,
                             color = borderColor,
                             shape = AbsoluteRoundedCornerShape(4.dp)
-                        ).padding(17.dp)
-                        .clickable { currentStep = 1 }
-                )
+                        )
+                        .padding(17.dp)
+                        .clickable { currentStep = 1 })
                 Spacer(modifier = Modifier.height(32.dp))
                 Text(
-                    text = stringResource(R.string.empty_glass),
-                    fontSize = 18.sp
+                    text = stringResource(R.string.empty_glass), fontSize = 18.sp
                 )
 
             }
